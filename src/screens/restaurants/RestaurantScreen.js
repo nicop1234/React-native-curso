@@ -7,6 +7,7 @@ import { screens } from "../../utils";
 import { Button } from "@rneui/base";
 
 export function RestaurantScreen() {
+  
   const navigation = useNavigation();
   const goToAddRestaurant = () => {
     navigation.navigate(screens.restaurant.addRestaurantScreen, {
@@ -15,7 +16,7 @@ export function RestaurantScreen() {
   };
   return (
     <View>
-      <Text>restaurant</Text>
+      <Text>restaurantes</Text>
       <Button title='Crear restaurante' onPress={() => goToAddRestaurant()} />
     </View>
   );

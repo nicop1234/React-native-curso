@@ -1,11 +1,10 @@
 /** @format */
 
 import React from "react";
-import { LogginScreen } from "../LogingScreen.js/LoginScreen";
 import { useNavigation } from "@react-navigation/native";
 import { screens } from "../../../utils"
-import { View, ScrollView } from "react-native";
-import { Text, Button, Image } from "@rneui/base";
+import { View, ScrollView, Text} from "react-native";
+import { Button, Image } from "@rneui/base";
 import { styles } from "./userGuestScreen.Styles";
 
 export function UsersGuestSceen() {
@@ -26,7 +25,7 @@ export function UsersGuestSceen() {
       <Text style={styles.description}>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type ands
+        since the 1500s, when an unknown printer took a galley of type andssds
       </Text>
 
       <View>

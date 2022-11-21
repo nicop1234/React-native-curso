@@ -1,9 +1,10 @@
 /** @format */
 import React, {useState, useEffect} from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { UserLoggedScreen } from "./UserLoggedScreen";
-import { UsersGuestSceen } from "./userGuestScreen";
+import { UserLogedScreen } from "./UserLogedScreen/UserLogedScreen"
+import { UsersGuestSceen } from "./UserGuestScreen/UsersGuestSceen"
 import { LoadingModal } from "../../components/shared"
+
 
 
 export function AccountScreen() {
@@ -22,6 +23,6 @@ export function AccountScreen() {
     return <LoadingModal text={"cargando"} show/>
   }
 
-  return hasLogged ? <UserLoggedScreen/> : <UsersGuestSceen/>
+  return hasLogged ? <UserLogedScreen/> : <UsersGuestSceen/>
 
 ;}

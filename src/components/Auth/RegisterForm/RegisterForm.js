@@ -30,7 +30,7 @@ export function RegisterForm() {
           formValue.email,
           formValue.password
         );
-        navigation.navigate(screens.account.Login)
+        navigation.navigate(screens.account.account)
       } catch (error) {
         Toast.show({
           type: "error",
