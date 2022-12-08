@@ -14,20 +14,16 @@ import { useNavigation } from "@react-navigation/native";
 
 export function LoginForm() {
   const [security, setSecurity] = useState(true);
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: validationSchema(),
     validateOnChange: false,
-    onSubmit: (formValue) => {
+    onSubmit: async(formValue) => {
       try {
         const auth = getAuth();
-         signInWithEmailAndPassword(
-          auth,
-          formValue.email,
-          formValue.password
-        );
+        await signInWithEmailAndPassword(auth, formValue.email, formValue.password);
         navigation.navigate(screens.account.account);
       } catch (error) {
         Toast.show({
@@ -35,7 +31,7 @@ export function LoginForm() {
           position: "bottom",
           text1: "error al iniciar sesion",
         });
-        console.logo(error);
+
       }
     },
   });
@@ -43,6 +39,8 @@ export function LoginForm() {
   return (
     <View style={styles.content}>
       <Input
+        label='Asegurese que no haya un espacio al final'
+        labelStyle={styles.texto}
         placeholder='correo electronico'
         containerStyle={styles.input}
         rightIcon={
@@ -70,8 +68,7 @@ export function LoginForm() {
         containerStyle={styles.btnContain}
         buttonStyle={styles.btnStyle}
         onPress={formik.handleSubmit}
-        loading={formik.isSubmitting}
-      >
+        loading={formik.isSubmitting}>
         Iniciar sesion
       </Button>
     </View>

@@ -19,9 +19,10 @@ export function LoginScreen() {
   return (
     <ScrollView>
       <Image
-        source={require("../../../../assets/img/logo.png")}
+        source={require("../../../../assets/img/flecha2.png")}
         style={styles.img}
       />
+
       <LoginForm/>
       <View style={styles.textRegister}>
         <Text>¿Aún no tienes cuenta? <Text style={styles.btnRegister} onPress={() => goToRegister()}>Registrarse</Text></Text>

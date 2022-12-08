@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
         width: "95%",
     },
     btnStyle:{
-        backgroundColor:"#00a680"
+        backgroundColor:"#FF2C00"
     },
     texto:{
         fontSize: 12,

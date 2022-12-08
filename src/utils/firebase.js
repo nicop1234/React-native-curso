@@ -1,15 +1,17 @@
-
+import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA1SAxOo-n62_hNTfmRCutY-p8P_OBEaUM",
-  authDomain: "pruebas-con-firebase-bbea9.firebaseapp.com",
-  projectId: "pruebas-con-firebase-bbea9",
-  storageBucket: "pruebas-con-firebase-bbea9.appspot.com",
-  messagingSenderId: "684514140852",
-  appId: "1:684514140852:web:1ec88501a878ee5036ade1"
+  apiKey: "AIzaSyAQ2bebCAebC8FYMhKta-TggWiKfm8PdUg",
+  authDomain: "proyecto-mieconomia.firebaseapp.com",
+  projectId: "proyecto-mieconomia",
+  storageBucket: "proyecto-mieconomia.appspot.com",
+  messagingSenderId: "412622775791",
+  appId: "1:412622775791:web:4ea4c7f680343473d7821a",
+  measurementId: "G-046S9ZYNP9"
 };
 
 
 export const initFirebase = initializeApp(firebaseConfig);
+export const db = getFirestore(initFirebase)

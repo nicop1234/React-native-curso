@@ -21,7 +21,7 @@ description:{
     marginBottom: 20,
 },
 btnStyle:{
-    backgroundColor:"#00a680"
+    backgroundColor:"#FF2C00"
 },
 
 })

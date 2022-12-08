@@ -1,57 +1,61 @@
 /** @format */
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {AccountStack} from "./AccountStack"
-import { RestaurantStack } from "./RestaurantStack";
-import {FavoritesStack} from "./FavoritesStack"
-import { RankingStack } from "./RankingStack"; 
-import { SearchStack } from "./SearchStack"
+import { AccountStack } from "./AccountStack";
+import { InicioStack } from "./InicioStack";
+import { ResumenStack } from "./ResumenStack";
 import { Icon } from "@rneui/base";
-import {screens} from "../utils"
-
+import { screens } from "../utils";
 
 const Tab = createBottomTabNavigator();
+
 
 export function AppNavigations() {
   return (
     <Tab.Navigator
-
-      screenOptions={({ route }) => ({
+       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: "#00a680",
+        tabBarActiveTintColor: "#FF2C00",
         tabBarInactiveTintColor: "#646464",
-        tabBarIcon: ({ color, size }) => screenOptions( route, color, size ),
-    
+        tabBarIcon: ({ color, size }) => screenOptions(route, color, size),
       })}>
-      <Tab.Screen name={screens.restaurant.tab} component={RestaurantStack} options={{title: "restaurant"}} />
-      <Tab.Screen name={screens.favorites.tab} component={FavoritesStack} options={{title: "favoritos"}}/>
-      <Tab.Screen name={screens.ranking.tab} component={RankingStack} options={{title: "ranking"}}/>
-      <Tab.Screen name={screens.search.tab} component={SearchStack} options={{title: "search"}}/>
-      <Tab.Screen name={screens.account.tab} component={AccountStack} options={{title: "Account"}}/>
-     
+      <Tab.Screen
+        name={screens.resumen.tab}
+        component={ResumenStack}
+        options={{ title: "Resumen" }}
+      />
+      <Tab.Screen
+        name={screens.inicio.tab}
+        component={InicioStack}
+        options={{ title: "Inicio" }}
+      />
+      <Tab.Screen
+        name={screens.account.tab}
+        component={AccountStack}
+        options={{ title: "Cuenta" }}
+      />
     </Tab.Navigator>
   );
 }
 
-function screenOptions ( route, color, size ){
-    let iconName;
+function screenOptions(route, color, size) {
+  let iconName;
 
-    if (route.name === screens.account.tab){
-        iconName = "home-outline"
-    }
-    if (route.name === screens.favorites.tab){
-        iconName = "heart-outline"
-    }
-    if (route.name === screens.ranking.tab){
-        iconName = "star-outline"
-    }
-    if (route.name === screens.restaurant.tab){
-      iconName = "compass-outline"
+  if (route.name === screens.account.tab) {
+    iconName = "account-circle-outline";
   }
-  if (route.name === screens.search.tab){
-    iconName = "magnify"
-}
-    return(
-        <Icon type="material-community" name={iconName} color={color} size={size}/>
-    )
-
+  if (route.name === screens.resumen.tab) {
+    iconName = "book-outline";
+  }
+  if (route.name === screens.inicio.tab) {
+    iconName = "home-outline";
+  }
+   /*if (route.name === screens.restaurant.tab) {
+    iconName = "compass-outline";
+  }
+  if (route.name === screens.search.tab) {
+    iconName = "magnify";
+  }*/
+  return (
+    <Icon type='material-community' name={iconName} color={color} size={size} />
+  );
 }

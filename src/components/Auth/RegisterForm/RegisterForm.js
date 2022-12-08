@@ -37,13 +37,15 @@ export function RegisterForm() {
           position: "bottom",
           text1:"error al registrarse, intentelo mas tarde"
         })
-        console.logo(error);
+        console.log(error);
       }
     },
   });
   return (
     <View style={styles.content}>
       <Input
+      label="Asegurese que no haya un espacio al final"
+      labelStyle={styles.texto}
         placeholder='correo electronico'
         containerStyle={styles.input}
         rightIcon={

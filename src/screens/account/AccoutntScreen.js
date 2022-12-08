@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { UserLogedScreen } from "./UserLogedScreen/UserLogedScreen"
-import { UsersGuestSceen } from "./UserGuestScreen/UsersGuestSceen"
+import { UsersGuestSceen } from "./userGuestScreen"
 import { LoadingModal } from "../../components/shared"
 
 

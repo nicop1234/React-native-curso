@@ -18,14 +18,12 @@ export function UsersGuestSceen() {
   return (
     <ScrollView centerContent={true} style={styles.content}>
       <Image
-        source={require("../../../../assets/img/user.png")}
+        source={require("../../../../assets/img/flecha2.png")}
         style={styles.image}
       />
-      <Text style={styles.title}>consultar tu perfil de 5 tenedores</Text>
+      <Text style={styles.title}>consultar tu perfil de MiEconomia</Text>
       <Text style={styles.description}>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type andssds
+        Para empezar hay que iniciar sesion
       </Text>
 
       <View>
