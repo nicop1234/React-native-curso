@@ -7,29 +7,27 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal:30,
   },
-
+  ingreso:{
+    marginTop:40,
+    fontSize:17,
+    borderRadius: 10,
+    borderWidth: 1,
+    padding:10,
+  },
   titleCont:{
     alignItems:"center",
   },
   title:{
-    fontSize:22,
+    fontSize:20,
   },
-
-btnStyle2:{
-  backgroundColor:"#FF2C00",
+  description:{
+    textAlign: "center",
+    marginTop: 20,
+    marginBottom:20,
 },
 btnStyle:{
-  backgroundColor:"#0E8A13",
-},
-contentbtn:{
-  marginTop:20,
-},
-textCont:{
-  alignItems:"center",
-  marginBottom:10
-},
-text:{
-  fontSize:16
+  backgroundColor:"#FF2C00",
+ 
 },
 
 });

@@ -39,11 +39,10 @@ export function Añadir(props) {
       try {
         formValue.value, 
         formValue.key = Math.floor(Math.random() * 100000);
-        const docRef = doc(db, `tipoIngreso/${email}`)
+        const docRef = doc(db, `tipoGasto/${email}`)
         await updateDoc(docRef, {
-          tipoIngreso: arrayUnion(formValue)
+          tipoGasto: arrayUnion(formValue)
       });
-
       onClose();
       onReload();
       } catch (error) {

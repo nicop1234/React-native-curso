@@ -18,7 +18,10 @@ export const styles = StyleSheet.create({
         width: "70%",
     },
     btnStyle:{
-        backgroundColor:"#00bb2d"
+        backgroundColor:"#0E8A13"
+    },
+    btnStyle2:{
+        backgroundColor:"#FF2C00"
     },
     texto:{
         fontSize: 12,
@@ -33,5 +36,17 @@ export const styles = StyleSheet.create({
         paddingHorizontal:40,
         marginBottom:10,
     },
-
+    title:{
+        fontSize:20,
+        marginBottom:10,
+        marginTop:15
+    },
+    btnContain2: {
+        width: "70%",
+        marginTop:300,
+      },
+      btnStyle2:{
+        backgroundColor: "#FF2C00",
+        borderRadius: 25,
+      },
 });

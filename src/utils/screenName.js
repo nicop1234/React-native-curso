@@ -9,6 +9,8 @@ const inicioStack = {
 const resumenStack = {
   tab: "resumenesTab",
   resumen: "Resumen",
+  vistaIndividual: "informacion",
+  InfoGeneral: "Informacion del dia"
 };
 
 const accountStack = {

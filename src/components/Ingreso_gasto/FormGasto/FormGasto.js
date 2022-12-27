@@ -1,8 +1,9 @@
 /** @format */
+
 import React, { useState, useEffect } from "react";
 import { View, FlatList } from "react-native";
 import { Button, Text, Input, Icon } from "@rneui/base";
-import { styles } from "./formIngresoStyles";
+import { styles } from "../FormIngreso/formIngresoStyles";
 import { SelectList } from "react-native-dropdown-select-list";
 import { Añadir } from "./Añadir/Añadir";
 import { Modal } from "../../shared/Modal";
@@ -15,9 +16,9 @@ import {
   setDoc,
   getFirestore
 } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { useFormik } from "formik";
-import { validationSchema, initialValues } from "./formIngresoData";
+import { validationSchema, initialValues } from "./Data";
 import Toast from "react-native-toast-message";
 import "react-native-get-random-values";
 import { db, screens } from "../../../utils";
@@ -25,31 +26,31 @@ import { useNavigation } from "@react-navigation/native";
 import { v4 as uuid } from 'uuid'
 import 'react-native-get-random-values'
 
-export function FormIngreso() {
+export function FormGasto() {
+  const [component, setComponent] = useState(false);
   const [selected, setSelecteds] = useState();
   const [render, setRender] = useState("");
   const [show, setShow] = useState(false);
   const [_, setReload] = useState(false);
-  const [component ,setComponent] = useState(false)
   const [arrayDeTipos, setArrayDeTipos] = useState();
-  const { email } = getAuth().currentUser;
   const onReload = () => setReload((prevState) => !prevState);
   const onCloseOpenModel = () => setShow((prevState) => !prevState);
   const navigation = useNavigation();
+  const { email } = getAuth().currentUser;
   const firestore = getFirestore();
 
 
   const borrarTipo = async () => {
-    const array = arrayDeTipos.tipoIngreso
+    const array = arrayDeTipos.tipoGasto
     const filtrado = array.filter((item) => {
       return item.value != selected;
     });
     
-    const docRef = doc(firestore, `tipoIngreso/${email}`);
+    const docRef = doc(firestore, `tipoGasto/${email}`);
     await updateDoc(docRef, {
-      tipoIngreso: deleteField(),
+      tipoGasto: deleteField(),
     });
-     await setDoc(docRef, { tipoIngreso: [...filtrado] });
+     await setDoc(docRef, { tipoGasto: [...filtrado] });
      Toast.show({
       type: "success",
       position: "bottom",
@@ -60,7 +61,7 @@ export function FormIngreso() {
   };
 
   useEffect(() => {
-    const ref = doc(db, `tipoIngreso/${email}`);
+    const ref = doc(db, `tipoGasto/${email}`);
     const unsub = onSnapshot(ref, (doc) => {
       setArrayDeTipos(doc.data());
     });
@@ -72,9 +73,9 @@ export function FormIngreso() {
       onCloseOpenModel();
       onReload();
       setSelecteds("");
-      setComponent(false)
+      setComponent(false);
     }
-    if (selected == "sueldo"){
+    if (selected == "en comida" || selected == "en transporte" || selected == "en combustible"){
       setComponent(false)
     }
   }, [selected]);
@@ -94,7 +95,7 @@ export function FormIngreso() {
         const hora = fecha.toLocaleTimeString('ar-EG')
         const id = uuid()
         formValue.id = id
-        formValue.ingreso = true;
+        formValue.ingreso = false;
         formValue.monto;
         formValue.tipo = selected;
         formValue.dia = dia;
@@ -126,7 +127,7 @@ export function FormIngreso() {
 
   return (
     <View style={styles.content}>
-      <Text style={styles.title}>Ingreso</Text>
+      <Text style={styles.title}>Gasto</Text>
       <Input
         keyboardType='numeric'
         labelStyle={styles.texto}
@@ -151,12 +152,12 @@ export function FormIngreso() {
         setSelected={setSelecteds}
         data={tipox}
         save='value'
-        placeholder='tipo de ingreso'
+        placeholder='tipo de gasto'
         onSelect={() => setComponent(true)}
       />
       <Button
         containerStyle={styles.btnContain}
-        buttonStyle={styles.btnStyle}
+        buttonStyle={styles.btnStyle2}
         onPress={formik.handleSubmit}
         loading={formik.isSubmitting}>
         Mandar
@@ -168,7 +169,7 @@ export function FormIngreso() {
         {render}
       </Modal>
       <FlatList
-        data={arrayDeTipos?.tipoIngreso}
+        data={arrayDeTipos?.tipoGasto}
         renderItem={(doc) => {
           const tipo = doc.item;
           tipox.push({ key: tipo.key, value: tipo.value });
@@ -183,7 +184,8 @@ export function FormIngreso() {
           });
         }}
       />
-       {component ? (
+
+      {component ? (
         <Button
           containerStyle={styles.btnContain2}
           buttonStyle={styles.btnStyle2}

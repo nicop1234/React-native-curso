@@ -10,7 +10,7 @@ export function initialValues() {
     mes:"",
     ano:"",
     hora:"",
-    };
+  };
 }
 
 export function validationSchema() {
