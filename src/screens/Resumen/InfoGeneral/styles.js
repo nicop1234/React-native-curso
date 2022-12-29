@@ -1,38 +1,69 @@
 /** @format */
 
+import { color } from "@rneui/base";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   content: {
     paddingVertical: 15,
   },
-
   titleContent: {
     alignItems: "center",
-    marginBottom:30,
+    marginBottom: 30,
   },
   title: {
-    fontSize: 23,
+    fontSize: 22,
     borderBottomColor: "#857976",
     borderBottomWidth: 1.5,
   },
 
-  btnStyle: {
-    backgroundColor: "#FF2C00",
-    marginHorizontal:50,
-    marginTop:25
-  },
   medio: {
-    marginLeft:30,
-    marginRight:-70,
+    marginLeft: 45,
+    marginRight: -85,
   },
 
   text: {
     margin: 10,
     fontSize: 16,
   },
-  aviso:{
-    marginTop:5,
-    alignItems:"center"
+  text2: {
+    margin: 7,
+    fontSize: 14,
+    marginLeft:20
   },
+  contentSubTitle:{
+    alignItems:"center",
+    marginTop:30,
+    borderBottomColor: "#857976",
+    borderBottomWidth: 1,
+    marginHorizontal:50,
+    marginBottom:10
+  },
+  subTitle:{
+    fontSize: 16,
+  },
+
+  list: {
+    width: 140,
+    backgroundColor:"#34D214"
+  },
+  listOther: {
+    width: 140,
+    backgroundColor:"#FF5A43",
+  },
+  list2: {
+    width: "100%",
+  },
+  contentList: {
+    alignItems: "center",
+    justifyContent:"center",
+    marginHorizontal:10
+  },
+  contentListFathe:{
+    flexDirection:"row",
+    alignItems: "center",
+    justifyContent:"center",
+    marginVertical:10,
+  },
+
 });

@@ -68,7 +68,7 @@ export function Info(props) {
           const tableData = [
             [
               `Monto del ${tipo.ingreso ? "ingreso:" : "gasto:"}`,
-              `$${tipo.monto}`,
+              `$ ${tipo.monto}`,
             ],
             [
               `Tipo del ${tipo.ingreso ? "ingreso:" : "gasto:"}`,

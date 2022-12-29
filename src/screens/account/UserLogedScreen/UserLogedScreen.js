@@ -34,14 +34,13 @@ export function UserLogedScreen() {
 
 
   const fakeDataTipoGasto = [
-    { value: "en comida", key: 1 },
-    { value: "en combustible", key: 2 },
-    { value: "en transporte", key: 3 },
+    { value: "comida", key: 1 },
+    { value: "transporte", key: 3 },
     { value: "+ añadir", key: 10000000000 },
   ];
 
   const buscarDocOrCreate3 = async (idDocumento) => {
-    const docRef = doc(firestore, `tipoGasto/''${email}`);
+    const docRef = doc(firestore, `tipoGasto/${email}`);
     const consulta = await getDoc(docRef);
     if (consulta.exists()) {
       const consulta = await getDoc(docRef);

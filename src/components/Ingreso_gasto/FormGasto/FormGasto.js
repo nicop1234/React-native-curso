@@ -75,7 +75,7 @@ export function FormGasto() {
       setSelecteds("");
       setComponent(false);
     }
-    if (selected == "en comida" || selected == "en transporte" || selected == "en combustible"){
+    if (selected == "comida" || selected == "transporte") {
       setComponent(false)
     }
   }, [selected]);

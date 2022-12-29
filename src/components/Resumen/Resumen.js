@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { View, FlatList, TouchableOpacity, ScrollView } from "react-native";
 import { Button, Text, Input, Icon, ListItem } from "@rneui/base";
-import { onSnapshot, doc, collection,  getFirestore} from "firebase/firestore";
+import { onSnapshot, doc, collection, getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import "react-native-get-random-values";
 import { db } from "../../utils";
@@ -15,11 +15,8 @@ import { LoadingModal } from "../../components/shared/loadingModal";
 export function Resumen() {
   const [ingresoGasto, setIngresoGasto] = useState();
   const [fitradoSt, setFiltrado] = useState();
-  const firestore = getFirestore();
 
-
-
-  const { email, uid } = getAuth().currentUser;
+  const { email } = getAuth().currentUser;
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -38,21 +35,19 @@ export function Resumen() {
     setFiltrado(filtrado);
   }, [ingresoGasto]);
 
-
-
   const goToInfo = (tipo) => {
     navigation.navigate(screens.resumen.vistaIndividual, {
       screens: screens.resumen.vistaIndividual,
       id: tipo.id,
     });
   };
-  
+
   const goToInfoGeneral = () => {
     navigation.navigate(screens.resumen.InfoGeneral, {
       screens: screens.resumen.InfoGeneral,
       dia: dia,
       mes: mes,
-      ano: ano
+      ano: ano,
     });
   };
 
@@ -81,13 +76,15 @@ export function Resumen() {
               });
             }}
           />
-          <Text style={styles.letras}>
-            {dia}/{mes + 1}/{ano}
-          </Text>
+          <View>
+            <Text style={styles.letras}>
+              {dia}/{mes + 1}/{ano}
+            </Text>
+          </View>
           <Button
             containerStyle={styles.btnContain}
             buttonStyle={styles.btnStyle}
-            onPress={()=>(goToInfoGeneral())}>
+            onPress={() => goToInfoGeneral()}>
             ver info del dia
           </Button>
           <FlatList
@@ -110,7 +107,7 @@ export function Resumen() {
               );
             }}
           />
-        </View> 
+        </View>
       )}
     </View>
   );

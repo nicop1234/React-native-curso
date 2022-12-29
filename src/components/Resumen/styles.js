@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
         padding:7,
         borderStartColor:"#0E8A13",
         borderStartWidth:10
-
     },
     listadosGasto:{
         flexDirection:"row",

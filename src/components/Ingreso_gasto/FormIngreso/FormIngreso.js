@@ -15,7 +15,7 @@ import {
   setDoc,
   getFirestore
 } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { useFormik } from "formik";
 import { validationSchema, initialValues } from "./formIngresoData";
 import Toast from "react-native-toast-message";
