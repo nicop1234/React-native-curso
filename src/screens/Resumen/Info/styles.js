@@ -23,8 +23,8 @@ export const styles = StyleSheet.create({
     marginTop:25
   },
   medio: {
-    marginLeft:30,
-    marginRight:-70,
+    marginLeft:50,
+    marginRight:-85,
   },
 
   text: {

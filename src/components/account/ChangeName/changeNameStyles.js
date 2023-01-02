@@ -1,5 +1,6 @@
 /** @format */
 
+import { arrayUnion } from "firebase/firestore";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -8,6 +9,13 @@ export const styles = StyleSheet.create({
   },
   btnContain: {
     width: "95%",
+    marginBottom:5,
+    marginLeft:10
+  },
+  btnContain2: {
+    width: "60%",
+    alignItems:"center",
+    marginLeft:70
   },
   btnStyle:{
     backgroundColor: "#FF2C00"

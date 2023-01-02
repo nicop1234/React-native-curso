@@ -1,9 +1,9 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
-import { View, FlatList, TouchableOpacity, ScrollView } from "react-native";
-import { Button, Text, Input, Icon, ListItem } from "@rneui/base";
-import { onSnapshot, doc, collection, getFirestore } from "firebase/firestore";
+import { View, FlatList, TouchableOpacity } from "react-native";
+import { Button, Text, Input } from "@rneui/base";
+import { onSnapshot, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import "react-native-get-random-values";
 import { db } from "../../utils";
@@ -11,10 +11,19 @@ import { useNavigation } from "@react-navigation/native";
 import { screens } from "../../utils";
 import { styles } from "./styles";
 import { LoadingModal } from "../../components/shared/loadingModal";
+import { Modal } from "../shared/Modal";
+import { InputFecha } from "./InputFecha/InputFecha";
 
 export function Resumen() {
   const [ingresoGasto, setIngresoGasto] = useState();
   const [fitradoSt, setFiltrado] = useState();
+  const [render, setRender] = useState("");
+  const [show, setShow] = useState(false);
+  const [_, setReload] = useState(false);
+  const [date, setFecha] = useState();
+
+  const onCloseOpenModel = () => setShow((prevState) => !prevState);
+  const onReload = () => setReload((prevState) => !prevState);
 
   const { email } = getAuth().currentUser;
   const navigation = useNavigation();
@@ -24,6 +33,7 @@ export function Resumen() {
     const unsub = onSnapshot(ref, (doc) => {
       setIngresoGasto(doc.data());
     });
+    setFecha(`${dia}/${mes + 1}/${ano}`);
   }, []);
 
   useEffect(() => {
@@ -34,6 +44,15 @@ export function Resumen() {
     });
     setFiltrado(filtrado);
   }, [ingresoGasto]);
+
+  useEffect(() => {
+    const filtrado2 = ingresoGasto?.IngresoGasto?.filter((item) => {
+      if (date == `${item.dia}/${item.mes + 1}/${item.ano}`) {
+        return true;
+      }
+    });
+    setFiltrado(filtrado2);
+  }, [date]);
 
   const goToInfo = (tipo) => {
     navigation.navigate(screens.resumen.vistaIndividual, {
@@ -51,11 +70,27 @@ export function Resumen() {
     });
   };
 
+  const abriModal = () => {
+    setRender(
+      <InputFecha
+        onClose={onCloseOpenModel}
+        onReload={onReload}
+        cambiarFecha={setFecha}
+        fecha={date}
+        dia={dia}
+        mes={mes}
+        ano={ano}
+      />
+    );
+    onCloseOpenModel();
+  };
+
   const fecha = new Date();
   const dia = fecha.getDate();
   const mes = fecha.getMonth();
   const ano = fecha.getFullYear();
 
+  console.log(date);
   return (
     <View>
       {!ingresoGasto ? (
@@ -76,15 +111,19 @@ export function Resumen() {
               });
             }}
           />
-          <View>
-            <Text style={styles.letras}>
-              {dia}/{mes + 1}/{ano}
-            </Text>
+          <View style={styles.letras}>
+            <Text style={styles.fecha}>{date}</Text>
+            <Button
+              buttonStyle={styles.btnStyleFecha}
+              onPress={() => abriModal()}
+            >
+              seleccionar
+            </Button>
           </View>
           <Button
-            containerStyle={styles.btnContain}
             buttonStyle={styles.btnStyle}
-            onPress={() => goToInfoGeneral()}>
+            onPress={() => goToInfoGeneral()}
+          >
             ver info del dia
           </Button>
           <FlatList
@@ -96,7 +135,8 @@ export function Resumen() {
                   <View
                     style={
                       tipo.ingreso ? styles.listados : styles.listadosGasto
-                    }>
+                    }
+                  >
                     <Text style={tipo.ingreso ? styles.title : styles.title2}>
                       {tipo.ingreso ? "INGRESO" : "GASTO"}
                     </Text>
@@ -109,6 +149,9 @@ export function Resumen() {
           />
         </View>
       )}
+      <Modal show={show} close={() => onCloseOpenModel()}>
+        {render}
+      </Modal>
     </View>
   );
 }
