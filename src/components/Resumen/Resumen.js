@@ -64,9 +64,7 @@ export function Resumen() {
   const goToInfoGeneral = () => {
     navigation.navigate(screens.resumen.InfoGeneral, {
       screens: screens.resumen.InfoGeneral,
-      dia: dia,
-      mes: mes,
-      ano: ano,
+      date:date
     });
   };
 

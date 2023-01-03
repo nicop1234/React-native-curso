@@ -23,23 +23,29 @@ export function InfoGeneral(props) {
   const { route } = props;
   const { email } = getAuth().currentUser;
   const navigation = useNavigation();
+  //db entera y despues filtrada
   const [ingresoGasto, setIngresoGasto] = useState();
-  const [arrayDeTiposIngreso, setArrayDeTiposIngreso] = useState();
-  const [arrayDeTiposGasto, setArrayDeTiposGasto] = useState();
-  const [arrayDeTiposIngresoSinAñadir, setArrayDeTiposIngresoSinAñadir] =
-    useState();
-  const [arrayDeTiposGastoSinAñadir, setArrayDeTiposGastoSinAñadir] =
-    useState();
   const [fitradoSt, setFiltrado] = useState();
+  //datos que se muestran
   const [ingreso, setIngreso] = useState();
   const [gasto, setGasto] = useState();
   const [balance, setBalance] = useState();
+  //seeleccion de selectlist
   const [ingresoSelecto, setIngresoSelecto] = useState(" ");
   const [gastoSelecto, setGastoSelecto] = useState(" ");
+  //states con con solo gastos o solo ingresos
   const [arraySoloIngresos, setArraySoloIngresos] = useState();
   const [arraySoloGastos, setArraySoloGastos] = useState();
+  //suma por tipo de gasto
   const [sumaGastoFilt, setSumaGastoFilt] = useState();
   const [sumaIngresoFilt, setSumaIngresoFilt] = useState();
+  //listas de tipos de gastos o tipos de ingresos
+  const [gastoTipoFitrado, setGastoFiltrado]  = useState()
+  const [ingresoTipoFitrado, setIngresoFiltrado]  = useState()
+  //listas sin filtrar
+  const [gastoTipoFitradoNo, setGastoFiltradoNo]  = useState()
+  const [ingresoTipoFitradoNo, setIngresoFiltradoNo]  = useState()
+
   useEffect(() => {
     const ref = doc(db, `ingresoGasto/${email}`);
     const unsub = onSnapshot(ref, (doc) => {
@@ -47,44 +53,17 @@ export function InfoGeneral(props) {
     });
   }, []);
 
-  useEffect(() => {
-    const ref = doc(db, `tipoIngreso/${email}`);
-    const unsub = onSnapshot(ref, (doc) => {
-      setArrayDeTiposIngreso(doc.data());
-    });
-  }, []);
-
-  useEffect(() => {
-    const ref = doc(db, `tipoGasto/${email}`);
-    const unsub = onSnapshot(ref, (doc) => {
-      setArrayDeTiposGasto(doc.data());
-    });
-  }, []);
 
   useEffect(() => {
     const filtrado = ingresoGasto?.IngresoGasto?.filter((item) => {
-      if (
-        (item.ano == route.params.ano) &
-        (item.mes == route.params.mes) &
-        (item.dia == route.params.dia)
-      ) {
+      if (route.params.date == `${item.dia}/${item.mes + 1}/${item.ano}`) {
+        
         return true;
       }
     });
     setFiltrado(filtrado);
   }, [ingresoGasto]);
 
-  useEffect(() => {
-    const arrayGastoSinAñadir = arrayGasto.filter((thiss) => {
-      if (thiss != "+ añadir") return true;
-    });
-    setArrayDeTiposGastoSinAñadir(arrayGastoSinAñadir);
-
-    const arrayingresoSinAñadir = arrayIngreso.filter((thiss) => {
-      if (thiss != "+ añadir") return true;
-    });
-    setArrayDeTiposIngresoSinAñadir(arrayingresoSinAñadir);
-  }, [arrayDeTiposGasto, arrayDeTiposIngreso]);
 
   useEffect(() => {
     const newGastoSuma = gastoSuma.filter((item) => {
@@ -96,6 +75,7 @@ export function InfoGeneral(props) {
     setArraySoloIngresos(newIngresoSuma);
     setArraySoloGastos(newGastoSuma);
   }, [fitradoSt]);
+
 
   useEffect(() => {
     let suma = 0;
@@ -109,7 +89,6 @@ export function InfoGeneral(props) {
     setSumaIngresoFilt(suma);
   }, [ingresoSelecto]);
 
-
   useEffect(() => {
     let suma = 0;
     const gastoFiltradoPorTipo = fitradoSt?.filter((item) => {
@@ -122,6 +101,30 @@ export function InfoGeneral(props) {
     setSumaGastoFilt(suma);
   }, [gastoSelecto]);
 
+
+  useEffect(() => {
+    const filtGasto = gastoTipoFitradoNo?.filter(( item, index ) => {
+      return gastoTipoFitradoNo.indexOf(item) === index;
+    })
+    setGastoFiltrado(filtGasto)
+    const filtIngreso = ingresoTipoFitradoNo?.filter(( item, index ) => {
+      return ingresoTipoFitradoNo.indexOf(item) === index;
+    })
+    setIngresoFiltrado(filtIngreso)
+  }, [gastoTipoFitradoNo, ingresoTipoFitradoNo ])
+
+
+  useEffect(() => {
+    arraySoloIngresos?.forEach((item)=>{
+      arrayIngreso.push(item.tipo)
+    })
+    setIngresoFiltradoNo(arrayIngreso)
+    arraySoloGastos?.forEach((item)=>{
+      arrayGasto.push(item.tipo)
+    })
+    setGastoFiltradoNo(arrayGasto)
+  }, [arraySoloIngresos, arraySoloGastos])
+  
   const gastoSuma = [];
   const arrayGasto = [];
   const arrayIngreso = [];
@@ -136,6 +139,7 @@ export function InfoGeneral(props) {
     [`ingreso en ${ingresoSelecto}`, `$ ${sumaIngresoFilt}`],
     [`gasto en ${gastoSelecto}`, `$ ${sumaGastoFilt}`],
   ];
+
   return (
     <View style={styles.content}>
       {!ingresoGasto ? (
@@ -145,20 +149,7 @@ export function InfoGeneral(props) {
           <View style={styles.titleContent}>
             <Text style={styles.title}>Informacion del dia</Text>
           </View>
-          <FlatList
-            data={arrayDeTiposIngreso?.tipoIngreso}
-            renderItem={(doc) => {
-              const tipo = doc.item;
-              arrayIngreso.push(tipo.value);
-            }}
-          />
-          <FlatList
-            data={arrayDeTiposGasto?.tipoGasto}
-            renderItem={(doc) => {
-              const tipo = doc.item;
-              arrayGasto.push(tipo.value);
-            }}
-          />
+
           <FlatList
             data={fitradoSt}
             renderItem={(doc) => {
@@ -170,12 +161,12 @@ export function InfoGeneral(props) {
                 monto: tipo.monto,
                 tipo: tipo.tipo,
               });
-
               arraySoloGastos.forEach((element) => {
                 let dt = parseInt(element.monto);
                 sumaGasto = sumaGasto + dt;
               });
               setGasto(sumaGasto);
+              
               arraySoloIngresos.forEach((element) => {
                 let dt2 = parseInt(element.monto);
                 sumaIngreso = sumaIngreso + dt2;
@@ -197,24 +188,28 @@ export function InfoGeneral(props) {
 
           <View style={styles.contentListFathe}>
             <View style={styles.contentList}>
+              
               <SelectList
                 boxStyles={styles.list}
                 inputStyles={styles.list2}
                 setSelected={setIngresoSelecto}
-                data={arrayDeTiposIngresoSinAñadir}
+                data={ingresoTipoFitrado}
                 save='value'
                 placeholder='ingreso'
               />
+            
             </View>
             <View style={styles.contentList}>
+               
               <SelectList
                 boxStyles={styles.listOther}
                 inputStyles={styles.list2}
                 setSelected={setGastoSelecto}
-                data={arrayDeTiposGastoSinAñadir}
+                data={gastoTipoFitrado}
                 save='value'
                 placeholder='gasto'
               />
+              
             </View>
           </View>
           <View style={styles.medio}>
