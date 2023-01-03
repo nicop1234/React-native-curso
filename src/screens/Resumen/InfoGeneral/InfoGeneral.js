@@ -34,8 +34,8 @@ export function InfoGeneral(props) {
   const [ingreso, setIngreso] = useState();
   const [gasto, setGasto] = useState();
   const [balance, setBalance] = useState();
-  const [ingresoSelecto, setIngresoSelecto] = useState();
-  const [gastoSelecto, setGastoSelecto] = useState();
+  const [ingresoSelecto, setIngresoSelecto] = useState(" ");
+  const [gastoSelecto, setGastoSelecto] = useState(" ");
   const [arraySoloIngresos, setArraySoloIngresos] = useState();
   const [arraySoloGastos, setArraySoloGastos] = useState();
   const [sumaGastoFilt, setSumaGastoFilt] = useState();

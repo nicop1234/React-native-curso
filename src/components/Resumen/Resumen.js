@@ -90,7 +90,6 @@ export function Resumen() {
   const mes = fecha.getMonth();
   const ano = fecha.getFullYear();
 
-  console.log(date);
   return (
     <View>
       {!ingresoGasto ? (
