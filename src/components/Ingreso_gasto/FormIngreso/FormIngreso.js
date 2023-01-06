@@ -13,7 +13,7 @@ import {
   arrayUnion,
   deleteField,
   setDoc,
-  getFirestore
+  getFirestore 
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useFormik } from "formik";
@@ -68,10 +68,9 @@ export function FormIngreso() {
 
   useEffect(() => {
     if (selected == "+ añadir") {
-      setRender(<Añadir onClose={onCloseOpenModel} onReload={onReload} />);
+      setRender(<Añadir onClose={onCloseOpenModel} onReload={onReload} setSeleccionado={setSelecteds} />);
       onCloseOpenModel();
       onReload();
-      setSelecteds("");
       setComponent(false)
     }
     if (selected == "sueldo"){
@@ -142,9 +141,6 @@ export function FormIngreso() {
         onChangeText={(text) => formik.setFieldValue("monto", text)}
         errorMessage={formik.errors.monto}
       />
-      <Text style={styles.text}>
-        agregar no puede estar en el momento de mandar el monto
-      </Text>
       <SelectList
         boxStyles={styles.list}
         inputStyles={styles.list}
@@ -164,7 +160,7 @@ export function FormIngreso() {
       <Modal
         show={show}
         close={() => onCloseOpenModel()}
-        onReload={() => onReload()}>
+        onReload={() => onReload()} >
         {render}
       </Modal>
       <FlatList

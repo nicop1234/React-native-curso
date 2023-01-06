@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "pruebas",
+    "name": "miEconomia",
     "slug": "pruebas",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/img/ic_launcher_round.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -22,9 +22,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/img/ic_launcher_round.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.nicop1234.pruebas"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -37,6 +41,11 @@
         }
       ]
     ],
-    "description": ""
+    "description": "",
+    "extra": {
+      "eas": {
+        "projectId": "d7ba5a2e-8406-4d5e-9f0c-583a5bc24841"
+      }
+    }
   }
 }

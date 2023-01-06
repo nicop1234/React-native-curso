@@ -28,7 +28,7 @@ import { screens } from "../../../../utils";
 export function Añadir(props) {
   const { email } = getAuth().currentUser;
 
-  const {  onClose, onReload } = props;
+  const {  onClose, onReload, setSeleccionado } = props;
   const navigation = useNavigation();
 
   const formik = useFormik({
@@ -37,6 +37,7 @@ export function Añadir(props) {
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
+        setSeleccionado(formValue.value)
         formValue.value, 
         formValue.key = Math.floor(Math.random() * 100000);
         const docRef = doc(db, `tipoGasto/${email}`)

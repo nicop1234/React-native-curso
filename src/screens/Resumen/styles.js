@@ -27,7 +27,22 @@ export const styles = StyleSheet.create({
 },
 btnStyle:{
   backgroundColor:"#FF2C00",
- 
+},
+separacion:{
+  flexDirection:"row",
+  marginHorizontal:27,
+  marginVertical:8,
 },
 
+Text1:{
+  marginRight:25
+},
+text:{
+  borderColor:"#857976",
+  borderBottomWidth:2,
+  padding:10
+},
+true:{
+  color:"#FF2C00"
+},
 });

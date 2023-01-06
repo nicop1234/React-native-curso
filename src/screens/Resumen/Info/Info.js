@@ -26,7 +26,6 @@ export function Info(props) {
   const [ingreso2, setIngreso2] = useState();
   const firestore = getFirestore();
 
-
   useEffect(() => {
     const ref = doc(db, `ingresoGasto/${email}`);
     const unsub = onSnapshot(ref, (doc) => {

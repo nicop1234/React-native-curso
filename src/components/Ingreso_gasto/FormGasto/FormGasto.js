@@ -69,10 +69,9 @@ export function FormGasto() {
 
   useEffect(() => {
     if (selected == "+ añadir") {
-      setRender(<Añadir onClose={onCloseOpenModel} onReload={onReload} />);
+      setRender(<Añadir onClose={onCloseOpenModel} onReload={onReload} setSeleccionado={setSelecteds}/>);
       onCloseOpenModel();
       onReload();
-      setSelecteds("");
       setComponent(false);
     }
     if (selected == "comida" || selected == "transporte") {

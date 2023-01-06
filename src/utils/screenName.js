@@ -10,7 +10,8 @@ const resumenStack = {
   tab: "resumenesTab",
   resumen: "Resumen",
   vistaIndividual: "informacion",
-  InfoGeneral: "Informacion del dia"
+  InfoGeneral: "Informacion del dia",
+  mensual: "Informacion del mes"
 };
 
 const accountStack = {
@@ -18,6 +19,7 @@ const accountStack = {
   account: "account",
   Login: "AddAcount",
   Register: "Register",
+  Recuperar:" Recuperar",
 };
 
 export const screens = {

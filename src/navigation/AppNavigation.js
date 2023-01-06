@@ -49,12 +49,7 @@ function screenOptions(route, color, size) {
   if (route.name === screens.inicio.tab) {
     iconName = "home-outline";
   }
-   /*if (route.name === screens.restaurant.tab) {
-    iconName = "compass-outline";
-  }
-  if (route.name === screens.search.tab) {
-    iconName = "magnify";
-  }*/
+
   return (
     <Icon type='material-community' name={iconName} color={color} size={size} />
   );
